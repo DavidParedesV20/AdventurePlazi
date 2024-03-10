@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
 private const string horizontal = "Horizontal";
 private const string vertical = "Vertical";
 
+
+private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,7 +33,11 @@ private const string vertical = "Vertical";
         if (Mathf.Abs(Input.GetAxisRaw(vertical)) > 0.5f)
         {
             this.transform.Translate(
-                new Vector3(0, Input.GetAxisRaw(vertical) * speed * Time.deltaTime, 0)); //Hasta aquí el personaje se mueve de izquierda a derecha arriba y abajo Clase https://platzi.com/clases/1478-rpg-unity/17591-el-jugador-y-el-movimiento/ //
+                new Vector3(0, Input.GetAxisRaw(vertical) * speed * Time.deltaTime, 0));
         }
+
+        animator.SetFloat(horizontal, Input.GetAxisRaw(horizontal));
+        animator.SetFloat(vertical, Input.GetAxisRaw(vertical));
+
     }
 }
